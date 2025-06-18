@@ -70,7 +70,7 @@ function App() {
       if (response.ok) {
         const updatedTodo = await response.json();
         setTodos(todos.map(todo => 
-          todo._id === id ? updatedTodo : todo
+          todo.id === id ? updatedTodo : todo
         ));
       } else {
         throw new Error(`Failed to update todo: ${response.status}`);
@@ -89,7 +89,7 @@ function App() {
       });
 
       if (response.ok) {
-        setTodos(todos.filter(todo => todo._id !== id));
+        setTodos(todos.filter(todo => todo.id !== id));
       } else {
         throw new Error(`Failed to delete todo: ${response.status}`);
       }
@@ -150,9 +150,9 @@ function App() {
           <p>No todos yet. Add one above!</p>
         ) : (
           todos.map(todo => (
-            <div key={todo._id} className={`todo-item ${todo.completed ? 'completed' : ''}`}>
+            <div key={todo.id} className={`todo-item ${todo.completed ? 'completed' : ''}`}>
               <span 
-                onClick={() => toggleTodo(todo._id)}
+                onClick={() => toggleTodo(todo.id)}
                 className="todo-text"
                 title="Click to toggle completion"
               >
@@ -163,7 +163,7 @@ function App() {
                   {todo.completed ? '✅' : '⭕'}
                 </span>
                 <button 
-                  onClick={() => deleteTodo(todo._id)}
+                  onClick={() => deleteTodo(todo.id)}
                   className="delete-btn"
                 >
                   Delete
